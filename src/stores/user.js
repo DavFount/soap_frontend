@@ -36,6 +36,24 @@ export const useUserStore = defineStore({
         console.error(err);
       }
     },
+    async followUser(userId, friendId) {
+      try {
+        const results = await api.put(`/friends/add`, { userId, friendId });
+        return true;
+      } catch (err) {
+        console.error(err);
+        return false;
+      }
+    },
+    async unfollowUser(userId, friendId) {
+      try {
+        const results = await api.put(`/friends/remove`, { userId, friendId });
+        return true;
+      } catch (err) {
+        console.error(err);
+        return false;
+      }
+    },
   },
   getters: {
     getUserById: (state) => {

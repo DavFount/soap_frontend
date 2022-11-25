@@ -62,11 +62,30 @@
                     Edit Profile
                   </button>
                   <button
-                    v-if="$route.params.id != authStore.user._id"
+                    v-if="
+                      $route.params.id != authStore.user._id &&
+                      !getProfileById(authStore.user._id).friends.includes(
+                        $route.params.id
+                      )
+                    "
                     type="button"
                     class="btn btn-primary"
+                    @click="followUser"
                   >
                     Follow
+                  </button>
+                  <button
+                    v-else-if="
+                      $route.params.id != authStore.user._id &&
+                      getProfileById(authStore.user._id).friends.includes(
+                        $route.params.id
+                      )
+                    "
+                    type="button"
+                    class="btn btn-danger"
+                    @click="unfollowUser"
+                  >
+                    Unfollow
                   </button>
                 </div>
               </div>
@@ -526,6 +545,30 @@ export default {
 
       this.inEditMode = false;
       this.updateProfile();
+    },
+    async followUser() {
+      const result = await this.userStore.followUser(
+        this.authStore.user._id,
+        this.$route.params.id
+      );
+      if (result) {
+        this.toast.success(`Successfully followed ${this.fullName}.`);
+        this.updateProfile();
+      } else {
+        this.toast.error("Something went wrong!");
+      }
+    },
+    async unfollowUser() {
+      const result = await this.userStore.unfollowUser(
+        this.authStore.user._id,
+        this.$route.params.id
+      );
+      if (result) {
+        this.toast.success(`Successfully unfollowed ${this.fullName}.`);
+        this.updateProfile();
+      } else {
+        this.toast.error("Something went wrong!");
+      }
     },
   },
 };
