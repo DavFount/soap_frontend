@@ -1,11 +1,12 @@
-### Clan Chaox API
-This API is for use within the ChaoX Discord and ChaoX Runner Utility (CRU). Though anyone is permitted to use the application, website, and discord the software used to create such applications are proprietary. All projects created by ChaoX are free to use however they are to be considered closed source.
+### The SOAP Dish
 
-The idea of this application is to expand upon the current game tracking and leader board system provided by Clan ChaoX.
+The SOAP Dish was created to help facilitate a deeper dive in to God's word. It focuses on the SOAP bible study method. SOAP Stands for Scripture, Observation, Application, and Prayer. It aims to slow down your reading of the bible and allow for it to soak in. Reading Scripture, Observing and extracting key verses, Defining how to apply it to your life, and praying for assitance and clarity.
 
 **[To-Do]**
-- Create a NPC Resource Guide (Location, Name, Image, What they do or sell)
-- Create an Items Resource Guide (Runes, Gear, Weapons, etc.)
+
+- Implement the Bible API for reading scripture
+- Implement the SOAP form for completing Bible Studies
 
 ### Disclaimer:
+
 All code provided in this repository is to be used at your own risk.
