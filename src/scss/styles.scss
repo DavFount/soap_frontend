@@ -1,0 +1,30 @@
+@import "~bootstrap/scss/bootstrap";
+
+.py-10 {
+    padding-top: 4rem
+}
+
+.card-bg-dark {
+    @extend .text-bg-dark;
+    background-color: #1d2024 !important;
+}
+
+.border-top-custom {
+    @extend .border-top;
+    border-top: 2px solid rgba(112, 18, 18, 0.5) !important;
+}
+
+.border-top-footer {
+    @extend .border-top;
+    border-top: 2px solid rgba(216, 154, 46, 0.5) !important;
+}
+
+.border-bottom-nav {
+    @extend .border-bottom;
+    border-bottom: 2px solid rgba(216, 154, 46, 0.5) !important;
+}
+
+.breadcrumb-link {
+    color: #4080c0;
+    text-decoration: none;
+  }

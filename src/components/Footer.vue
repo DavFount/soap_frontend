@@ -1,0 +1,40 @@
+<template>
+  <div class="container-fluid bg-dark">
+    <footer
+      class="d-flex flex-wrap justify-content-between align-items-center py-1 border-top-footer"
+    >
+      <p class="col-md-4 mb-0 text-muted">&copy; 2022 SOAP Saver</p>
+
+      <a
+        href="/"
+        class="fixed-bottom col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+      >
+        <svg class="bi me-2" width="40" height="32">
+          <use xlink:href="#bootstrap" />
+        </svg>
+      </a>
+
+      <ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item">
+          <RouterLink class="nav-link px-2 text-muted" to="/">Home</RouterLink>
+        </li>
+        <!-- <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">Features</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-muted">FAQs</a>
+        </li> -->
+        <li class="nav-item">
+          <RouterLink class="nav-link px-2 text-muted" to="/about"
+            >About</RouterLink
+          >
+        </li>
+      </ul>
+    </footer>
+  </div>
+</template>
+
+<style scoped></style>
