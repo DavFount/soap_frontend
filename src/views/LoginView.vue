@@ -1,35 +1,36 @@
 <template>
   <main class="form-signin w-100 m-auto">
-    <form @submit="submitForm" class="loginForm">
+    <form @submit.prevent="submitForm" class="loginForm">
       <img class="mb-4 logo" src="../assets/logo.svg" alt="" width="90" />
       <h1 class="h3 mb-3 fw-normal">Please Sign In</h1>
 
-      <div class="form-floating">
-        <input
-          v-model="email"
-          type="email"
-          class="form-control"
-          id="email"
-          placeholder="name@example.com"
-          required
-        />
-        <label for="email">Email address</label>
-      </div>
-      <div class="form-floating">
-        <input
-          v-model="password"
-          type="password"
-          class="form-control"
-          id="password"
-          placeholder="Password"
-          required
-        />
-        <label for="password">Password</label>
-      </div>
+      <fieldset>
+        <legend class="visually-hidden">Please Sign In</legend>
+        <div class="form-floating">
+          <BaseInput
+            v-model="email"
+            label="Email"
+            type="email"
+            class="form-control"
+            :showLabel="true"
+            required
+          />
+        </div>
+        <div class="form-floating">
+          <BaseInput
+            v-model="password"
+            label="Password"
+            type="password"
+            class="form-control mt-1"
+            :showLabel="true"
+            required
+          />
+        </div>
 
-      <button class="w-100 btn btn-lg btn-success" type="submit">
-        Sign in
-      </button>
+        <button class="w-100 btn btn-lg btn-success" type="submit">
+          Sign in
+        </button>
+      </fieldset>
     </form>
   </main>
 </template>
@@ -37,6 +38,8 @@
 <script>
 import { useAuthStore } from "@/stores/auth";
 import { useToast } from "vue-toastification";
+
+import BaseInput from "@/components/base/BaseInput.vue";
 
 export default {
   name: "LoginView",
@@ -49,6 +52,9 @@ export default {
       toast,
     };
   },
+  components: {
+    BaseInput,
+  },
   created() {
     document.title = "The SOAP Dish - Login";
   },
@@ -59,9 +65,7 @@ export default {
     };
   },
   methods: {
-    async submitForm(e) {
-      e.preventDefault();
-
+    async submitForm() {
       if (this.email && this.password) {
         return this.authStore
           .login(this.email, this.password)
@@ -82,14 +86,6 @@ export default {
 </script>
 
 <style scoped>
-label {
-  color: #c1c1c1;
-  font-size: 20px;
-}
-
-.form-control {
-  margin-top: 5px;
-}
 .loginForm {
   min-width: 500px;
   position: absolute;

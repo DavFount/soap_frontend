@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <form>
+      <form @submit.prevent="saveProfile">
         <div class="row">
           <div class="col-lg-4">
             <div class="card mb-4 shadow-custom card-bg-dark">
@@ -42,13 +42,14 @@
                   <button
                     v-if="inEditMode"
                     class="btn btn-primary ms-1"
-                    @click="saveProfile"
+                    type="submit"
                   >
                     Save
                   </button>
                   <button
                     v-if="inEditMode"
                     class="btn btn-info ms-1"
+                    type="button"
                     @click="cancelEditProfile"
                   >
                     Cancel
@@ -57,6 +58,7 @@
                     v-else
                     v-if="$route.params.id == authStore.user._id"
                     class="btn btn-primary ms-1"
+                    type="button"
                     @click="editProfile"
                   >
                     Edit Profile
@@ -92,190 +94,226 @@
             </div>
             <div class="card mb-4 mb-lg-0 shadow-custom card-bg-dark">
               <div class="card-body p-0">
-                <ul class="list-group list-group-flush rounded-3">
-                  <li
-                    class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
-                    v-if="!socials && !inEditMode"
-                  >
-                    <p class="mb-0">No Socials</p>
-                  </li>
-                  <li
-                    class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
-                    v-if="
-                      getProfileById($route.params.id).website || inEditMode
-                    "
-                  >
-                    <i class="fas fa-globe fa-lg text-warning"></i>
-                    <p class="mb-0">
-                      <input
-                        id="website"
-                        type="text"
-                        class="form-control"
-                        placeholder="Website"
-                        v-model="website"
-                        v-if="inEditMode"
-                      />
-                      <span v-else> {{ website }}</span>
-                    </p>
-                  </li>
-                  <li
-                    class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
-                    v-if="
-                      getProfileById($route.params.id).twitter || inEditMode
-                    "
-                  >
-                    <i class="fab fa-twitter fa-lg" style="color: #55acee"></i>
-                    <p class="mb-0">
-                      <input
-                        id="twitter"
-                        type="text"
-                        class="form-control"
-                        placeholder="Twitter"
-                        v-if="inEditMode"
-                        v-model="twitter"
-                      />
-                      <span v-else>{{ twitter }}</span>
-                    </p>
-                  </li>
-                  <li
-                    class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
-                    v-if="
-                      getProfileById($route.params.id).instagram || inEditMode
-                    "
-                  >
-                    <i
-                      class="fab fa-instagram fa-lg"
-                      style="color: #ac2bac"
-                    ></i>
-                    <p class="mb-0">
-                      <input
-                        id="instagram"
-                        type="text"
-                        class="form-control"
-                        placeholder="Instagram"
-                        v-if="inEditMode"
-                        v-model="instagram"
-                      />
-                      <span v-else>{{ instagram }}</span>
-                    </p>
-                  </li>
-                  <li
-                    class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
-                    v-if="
-                      getProfileById($route.params.id).facebook || inEditMode
-                    "
-                  >
-                    <i
-                      class="fab fa-facebook-f fa-lg"
-                      style="color: #3b5998"
-                    ></i>
-                    <p class="mb-0">
-                      <input
-                        id="facebook"
-                        type="text"
-                        class="form-control"
-                        placeholder="Facebook"
-                        v-if="inEditMode"
-                        v-model="facebook"
-                      />
-                      <span v-else>{{ facebook }}</span>
-                    </p>
-                  </li>
-                </ul>
+                <fieldset>
+                  <legend class="visually-hidden">Social Links</legend>
+                  <ul class="list-group list-group-flush rounded-3">
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
+                      v-if="!socials && !inEditMode"
+                    >
+                      <p class="mb-0">No Socials</p>
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
+                      v-if="
+                        getProfileById($route.params.id).website || inEditMode
+                      "
+                    >
+                      <i class="fas fa-globe fa-lg text-warning"></i>
+                      <p class="mb-0">
+                        <BaseInput
+                          label="Website"
+                          :showLabel="false"
+                          class="form-control"
+                          v-model="website"
+                          type="text"
+                          placeholder="Website"
+                          v-if="inEditMode"
+                        />
+                        <span v-else> {{ website }}</span>
+                      </p>
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
+                      v-if="
+                        getProfileById($route.params.id).twitter || inEditMode
+                      "
+                    >
+                      <i
+                        class="fab fa-twitter fa-lg"
+                        style="color: #55acee"
+                      ></i>
+                      <p class="mb-0">
+                        <BaseInput
+                          label="Twitter"
+                          :showLabel="false"
+                          class="form-control"
+                          v-model="twitter"
+                          type="text"
+                          placeholder="Twitter"
+                          v-if="inEditMode"
+                        />
+                        <span v-else>{{ twitter }}</span>
+                      </p>
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
+                      v-if="
+                        getProfileById($route.params.id).instagram || inEditMode
+                      "
+                    >
+                      <i
+                        class="fab fa-instagram fa-lg"
+                        style="color: #ac2bac"
+                      ></i>
+                      <p class="mb-0">
+                        <BaseInput
+                          label="Instagram"
+                          :showLabel="false"
+                          class="form-control"
+                          v-model="instagram"
+                          type="text"
+                          placeholder="Instagram"
+                          v-if="inEditMode"
+                        />
+                        <span v-else>{{ instagram }}</span>
+                      </p>
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center p-3 bg-dark text-light"
+                      v-if="
+                        getProfileById($route.params.id).facebook || inEditMode
+                      "
+                    >
+                      <i
+                        class="fab fa-facebook-f fa-lg"
+                        style="color: #3b5998"
+                      ></i>
+                      <p class="mb-0">
+                        <BaseInput
+                          label="Facebook"
+                          :showLabel="false"
+                          class="form-control"
+                          v-model="facebook"
+                          type="text"
+                          placeholder="Facebook"
+                          v-if="inEditMode"
+                        />
+                        <span v-else>{{ facebook }}</span>
+                      </p>
+                    </li>
+                  </ul>
+                </fieldset>
               </div>
             </div>
           </div>
           <div class="col-lg-8">
             <div class="card mb-4 shadow-custom card-bg-dark">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Full Name</p>
+                <fieldset>
+                  <legend class="visually-hidden">User Information</legend>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ fullName }}</p>
+                    </div>
                   </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">{{ fullName }}</p>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Title</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">
+                        <BaseInput
+                          label="Title"
+                          :showLabel="false"
+                          class="form-control"
+                          v-model="title"
+                          type="text"
+                          placeholder="Title"
+                          v-if="inEditMode"
+                        />
+                        <span v-else>{{ title }}</span>
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Title</p>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Location</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">
+                        <BaseInput
+                          label="Location"
+                          :showLabel="false"
+                          class="form-control"
+                          v-model="location"
+                          type="text"
+                          placeholder="Location"
+                          v-if="inEditMode"
+                        />
+                        <span v-else>{{ location }}</span>
+                      </p>
+                    </div>
                   </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">
-                      <input
-                        id="title"
-                        type="text"
-                        class="form-control"
-                        placeholder="Title"
-                        maxlength="25"
-                        v-if="inEditMode"
-                        v-model="title"
-                      />
-                      <span v-else>{{ title }}</span>
-                    </p>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Bio</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">
+                        <BaseInput
+                          label="Bio"
+                          :showLabel="false"
+                          class="form-control"
+                          v-model="bio"
+                          type="text"
+                          placeholder="Bio"
+                          v-if="inEditMode"
+                        />
+                        <span v-else>{{ bio }}</span>
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Location</p>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Language</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">
+                        <BaseSelect
+                          label="Language"
+                          class="form-select"
+                          :showLabel="false"
+                          :options="languages"
+                          v-model="language"
+                          v-if="inEditMode"
+                        />
+                        <span v-else>{{
+                          getLanguageById(language).name_en
+                        }}</span>
+                      </p>
+                    </div>
                   </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">
-                      <input
-                        id="location"
-                        type="text"
-                        class="form-control"
-                        placeholder="Location"
-                        v-if="inEditMode"
-                        v-model="location"
-                      />
-                      <span v-else>{{ location }}</span>
-                    </p>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Joined</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">
+                        {{ joinDate }}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Bio</p>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Updated</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">
+                        {{ lastUpdate }}
+                      </p>
+                    </div>
                   </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">
-                      <input
-                        id="bio"
-                        type="text"
-                        class="form-control"
-                        placeholder="Bio"
-                        v-model="bio"
-                        v-if="inEditMode"
-                      />
-                      <span v-else>{{ bio }}</span>
-                    </p>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Joined</p>
-                  </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">
-                      {{ joinDate }}
-                    </p>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Updated</p>
-                  </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">
-                      {{ lastUpdate }}
-                    </p>
-                  </div>
-                </div>
+                </fieldset>
               </div>
             </div>
             <div class="row">
@@ -434,13 +472,17 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { useUserStore } from "@/stores/user";
+import { useLanguageStore } from "@/stores/language";
 import { useRoute } from "vue-router";
 import { useToast } from "vue-toastification";
 import moment from "moment";
 
 import GravatarAvatar from "@/components/GravatarAvatar.vue";
+import BaseInput from "@/components/base/BaseInput.vue";
+import BaseSelect from "@/components/base/BaseSelect.vue";
 
 export default {
   name: "ProfileFields",
@@ -448,14 +490,21 @@ export default {
   setup() {
     const authStore = useAuthStore();
     const userStore = useUserStore();
+    const languageStore = useLanguageStore();
     const toast = useToast();
     const route = useRoute();
+
+    if (!languageStore.languages) {
+      languageStore.getLanguages();
+    }
 
     return {
       authStore,
       userStore,
+      languageStore,
       getUserById: userStore.getUserById,
       getProfileById: userStore.getProfileById,
+      getLanguageById: languageStore.getLanguageById,
       toast,
       route,
     };
@@ -485,6 +534,17 @@ export default {
         profile.facebook
       );
     },
+    languages() {
+      const langArray = [];
+      for (const languageId in this.languageStore.languages) {
+        const language = this.getLanguageById(languageId);
+        langArray.push({
+          value: languageId,
+          display: language.name_en,
+        });
+      }
+      return langArray;
+    },
     joinDate() {
       const createdAt = this.getProfileById(this.$route.params.id).createdAt;
       return moment(createdAt).format("MMM Do YYYY");
@@ -496,6 +556,8 @@ export default {
   },
   components: {
     GravatarAvatar,
+    BaseInput,
+    BaseSelect,
   },
   data() {
     return {
@@ -507,25 +569,37 @@ export default {
       twitter: this.getProfileById(this.$route.params.id).twitter,
       instagram: this.getProfileById(this.$route.params.id).instagram,
       facebook: this.getProfileById(this.$route.params.id).facebook,
-      options: this.getProfileById(this.$route.params.id).options,
+      language: this.getLanguageById(
+        this.getProfileById(this.$route.params.id).language
+      )._id,
     };
   },
   methods: {
     async updateProfile() {
       await this.userStore.getUsers(this.authStore.user.token);
+      this.title = this.getProfileById(this.$route.params.id).title;
+      this.location = this.getProfileById(this.$route.params.id).location;
+      this.bio = this.getProfileById(this.$route.params.id).bio;
+      this.website = this.getProfileById(this.$route.params.id).website;
+      this.twitter = this.getProfileById(this.$route.params.id).twitter;
+      this.instagram = this.getProfileById(this.$route.params.id).instagram;
+      this.facebook = this.getProfileById(this.$route.params.id).facebook;
+      this.language = this.getLanguageById(
+        this.getProfileById(this.$route.params.id).language
+      )._id;
     },
     editProfile(e) {
       e.preventDefault();
 
       this.inEditMode = true;
     },
-    cancelEditProfile(e) {
+    async cancelEditProfile(e) {
       e.preventDefault();
 
       this.inEditMode = false;
+      await this.updateProfile();
     },
-    async saveProfile(e) {
-      e.preventDefault();
+    async saveProfile() {
       const values = {
         title: this.title,
         location: this.location,
@@ -534,11 +608,7 @@ export default {
         twitter: this.twitter,
         instagram: this.instagram,
         facebook: this.facebook,
-        options: {
-          showEmail: false,
-          showPhone: false,
-          showMobile: false,
-        },
+        language: this.language,
       };
 
       await this.userStore.updateProfile(this.authStore.user._id, values);

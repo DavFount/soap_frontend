@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "../stores/auth";
 
 import HomeView from "../views/HomeView.vue";
-import AboutView from "../views/AboutView.vue";
+import SOAPView from "../views/SOAPView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import VerifyView from "../views/VerifyView.vue";
@@ -18,9 +18,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/about",
-      name: "about",
-      component: AboutView,
+      path: "/soap",
+      name: "soap",
+      component: SOAPView,
     },
     {
       path: "/login",

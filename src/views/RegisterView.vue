@@ -1,106 +1,118 @@
 <template>
   <main class="form-signin w-100 m-auto">
-    <form @submit="submitForm" class="loginForm">
+    <form @submit.prevent="submitForm" class="loginForm">
       <img class="mb-4 logo" src="../assets/logo.svg" alt="" width="90" />
       <h1 class="h3 mb-3 fw-normal">Register an Account</h1>
 
-      <div
-        :class="firstNameErrors ? 'form-floating is-invalid' : 'form-floating'"
-      >
-        <input
-          v-model="firstName"
-          type="text"
-          :class="firstNameErrors ? 'form-control is-invalid' : 'form-control'"
-          id="first_name"
-          placeholder="John"
-        />
-        <label for="first_name">First Name</label>
-      </div>
-      <div
-        v-if="firstNameErrors"
-        class="invalid-feedback register-invalid-feedback"
-      >
-        {{ firstNameErrors }}
-      </div>
-
-      <div
-        :class="lastNameErrors ? 'form-floating is-invalid' : 'form-floating'"
-      >
-        <input
-          v-model="lastName"
-          type="text"
-          :class="lastNameErrors ? 'form-control is-invalid' : 'form-control'"
-          id="last_name"
-          placeholder="Doe"
-        />
-        <label for="last_name">Last Name</label>
-      </div>
-      <div
-        v-if="lastNameErrors"
-        class="invalid-feedback register-invalid-feedback"
-      >
-        {{ lastNameErrors }}
-      </div>
-
-      <div :class="emailErrors ? 'form-floating is-invalid' : 'form-floating'">
-        <input
-          v-model="email"
-          type="email"
-          :class="emailErrors ? 'form-control is-invalid' : 'form-control'"
-          id="email"
-          placeholder="name@example.com"
-        />
-        <label for="email">Email address</label>
-      </div>
-      <div
-        v-if="emailErrors"
-        class="invalid-feedback register-invalid-feedback"
-      >
-        {{ emailErrors }}
-      </div>
-
-      <div
-        :class="passwordErrors ? 'form-floating is-invalid' : 'form-floating'"
-      >
-        <input
-          v-model="password"
-          type="password"
-          :class="passwordErrors ? 'form-control is-invalid' : 'form-control'"
-          id="password"
-          placeholder="Password"
-        />
-        <label for="password">Password</label>
-      </div>
-      <div
-        v-if="passwordErrors"
-        class="invalid-feedback register-invalid-feedback"
-      >
-        {{ passwordErrors }}
-      </div>
-
-      <div
-        :class="
-          confirmPasswordErrors ? 'form-floating is-invalid' : 'form-floating'
-        "
-      >
-        <input
-          v-model="confirmPassword"
-          type="password"
+      <fieldset>
+        <legend class="visually-hidden">Register an Account</legend>
+        <div
           :class="
-            confirmPasswordErrors ? 'form-control is-invalid' : 'form-control'
+            firstNameErrors ? 'form-floating is-invalid' : 'form-floating'
           "
-          id="confirm_password"
-          placeholder="Password"
-        />
-        <label for="confirm_password">Confirm Password</label>
-      </div>
-      <div
-        v-if="confirmPasswordErrors"
-        class="invalid-feedback register-invalid-feedback"
-      >
-        {{ confirmPasswordErrors }}
-      </div>
+        >
+          <BaseInput
+            v-model="firstName"
+            label="First Name"
+            type="text"
+            :class="
+              firstNameErrors ? 'form-control is-invalid' : 'form-control'
+            "
+            :showLabel="true"
+            required
+          />
+        </div>
+        <div
+          v-if="firstNameErrors"
+          class="invalid-feedback register-invalid-feedback"
+        >
+          {{ firstNameErrors }}
+        </div>
 
+        <div
+          :class="lastNameErrors ? 'form-floating is-invalid' : 'form-floating'"
+        >
+          <BaseInput
+            v-model="lastName"
+            label="Last Name"
+            type="text"
+            :class="lastNameErrors ? 'form-control is-invalid' : 'form-control'"
+            style="margin-top: 5px"
+            :showLabel="true"
+            required
+          />
+        </div>
+        <div
+          v-if="lastNameErrors"
+          class="invalid-feedback register-invalid-feedback"
+        >
+          {{ lastNameErrors }}
+        </div>
+
+        <div
+          :class="emailErrors ? 'form-floating is-invalid' : 'form-floating'"
+        >
+          <BaseInput
+            v-model="email"
+            label="Email Address"
+            type="email"
+            :class="emailErrors ? 'form-control is-invalid' : 'form-control'"
+            style="margin-top: 5px"
+            :showLabel="true"
+            required
+          />
+        </div>
+        <div
+          v-if="emailErrors"
+          class="invalid-feedback register-invalid-feedback"
+        >
+          {{ emailErrors }}
+        </div>
+
+        <div
+          :class="passwordErrors ? 'form-floating is-invalid' : 'form-floating'"
+        >
+          <BaseInput
+            v-model="password"
+            label="Password"
+            type="password"
+            :class="passwordErrors ? 'form-control is-invalid' : 'form-control'"
+            style="margin-top: 5px"
+            :showLabel="true"
+            required
+          />
+        </div>
+        <div
+          v-if="passwordErrors"
+          class="invalid-feedback register-invalid-feedback"
+        >
+          {{ passwordErrors }}
+        </div>
+
+        <div
+          :class="
+            confirmPasswordErrors ? 'form-floating is-invalid' : 'form-floating'
+          "
+        >
+          <BaseInput
+            v-model="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            :class="
+              confirmPasswordErrors ? 'form-control is-invalid' : 'form-control'
+            "
+            style="margin-top: 5px"
+            :showLabel="true"
+            required
+          />
+        </div>
+        <div
+          v-if="confirmPasswordErrors"
+          class="invalid-feedback register-invalid-feedback"
+        >
+          {{ confirmPasswordErrors }}
+        </div>
+      </fieldset>
       <button class="w-100 btn btn-lg btn-success" type="submit">
         Register
       </button>
@@ -112,6 +124,8 @@
 import { useAuthStore } from "@/stores/auth";
 import { useToast } from "vue-toastification";
 
+import BaseInput from "@/components/base/BaseInput.vue";
+
 export default {
   name: "LoginView",
   inheritAttrs: false,
@@ -122,6 +136,9 @@ export default {
       authStore,
       toast,
     };
+  },
+  components: {
+    BaseInput,
   },
   created() {
     document.title = "The SOAP Dish - Register";
@@ -190,8 +207,7 @@ export default {
     },
   },
   methods: {
-    async submitForm(e) {
-      e.preventDefault();
+    async submitForm() {
       if (this.validateForm()) {
         return this.authStore
           .register(this.firstName, this.lastName, this.email, this.password)

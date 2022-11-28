@@ -3,7 +3,9 @@
     <footer
       class="d-flex flex-wrap justify-content-between align-items-center py-1 border-top-footer"
     >
-      <p class="col-md-4 mb-0 text-muted">&copy; 2022 SOAP Saver</p>
+      <p class="col-md-4 mb-0 text-muted">
+        &copy; {{ new Date().getFullYear() }} The SOAP Dish
+      </p>
 
       <a
         href="/"
@@ -28,8 +30,8 @@
           <a href="#" class="nav-link px-2 text-muted">FAQs</a>
         </li> -->
         <li class="nav-item">
-          <RouterLink class="nav-link px-2 text-muted" to="/about"
-            >About</RouterLink
+          <RouterLink class="nav-link px-2 text-muted" to="/soap"
+            >SOAP</RouterLink
           >
         </li>
       </ul>

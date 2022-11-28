@@ -27,10 +27,10 @@
           <li class="nav-item">
             <RouterLink
               :class="
-                $route.fullPath == '/about' ? 'nav-link active' : 'nav-link'
+                $route.fullPath == '/soap' ? 'nav-link active' : 'nav-link'
               "
-              to="/about"
-              >About</RouterLink
+              to="/soap"
+              >Soap Form</RouterLink
             >
           </li>
           <!-- <li class="nav-item">
@@ -38,7 +38,7 @@
               >Join our Discord</a
             >
           </li> -->
-          <li class="nav-item dropdown text-bg-dark">
+          <!-- <li class="nav-item dropdown text-bg-dark">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -57,7 +57,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link disabled">Disabled</a>
-          </li>
+          </li> -->
         </ul>
         <div v-if="!authStore.user">
           <RouterLink class="btn btn-outline-success" to="/login"
