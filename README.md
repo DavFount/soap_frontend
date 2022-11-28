@@ -20,14 +20,14 @@
   <p align="center">
     A Bible study application focusing on the SOAP Method.
     <br />
-    <a href="https://github.com/DavFount/soap_ts/wiki"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/DavFount/soap_frontend/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/DavFount/soap_ts">View Demo</a>
+    <a href="https://github.com/DavFount/soap_frontend">View Demo</a>
     ·
-    <a href="https://github.com/DavFount/soap_ts/issues">Report Bug</a>
+    <a href="https://github.com/DavFount/soap_frontend/issues">Report Bug</a>
     ·
-    <a href="https://github.com/DavFount/soap_ts/issues">Request Feature</a>
+    <a href="https://github.com/DavFount/soap_frontend/issues">Request Feature</a>
   </p>
 </div>
 
@@ -118,7 +118,7 @@ As features/ideas come to mind I will continually update this section with addit
 - [ ] Implement an Online Bible in various translations (Looking for partners)
 - [ ] Add the ability share SOAP forms to the public to complete (Idea is to allow small groups to share a link to members to complete and save them in a specific location.)
 
-See the [open issues](https://github.com/DavFount/soap_ts/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/DavFount/soap_frontend/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -154,7 +154,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 David - david@thesoapdish.app <br />
 Projects:
 
-- [The SOAP Dish API](https://github.com/DavFount/soap_ts)
+- [The SOAP Dish API](https://github.com/DavFount/soap_frontend)
 - [The SOAP Dish Vue](https://github.com/DavFount/soap_frontend)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -175,16 +175,16 @@ Projects:
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/DavFount/soap_ts?style=for-the-badge
-[contributors-url]: https://github.com/DavFount/soap_ts/graphs/contributors
-[commit-shield]: https://img.shields.io/github/last-commit/DavFount/soap_ts?style=for-the-badge
-[commit-url]: https://github.com/DavFount/soap_ts
-[stars-shield]: https://img.shields.io/github/stars/DavFount/soap_ts?style=for-the-badge
-[stars-url]: https://github.com/DavFount/soap_ts/stargazers
-[issues-shield]: https://img.shields.io/github/issues/DavFount/soap_ts?style=for-the-badge
-[issues-url]: https://github.com/DavFount/soap_ts/issues
-[license-shield]: https://img.shields.io/github/license/DavFount/soap_ts?style=for-the-badge
-[license-url]: https://github.com/DavFount/soap_ts/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/DavFount/soap_frontend?style=for-the-badge
+[contributors-url]: https://github.com/DavFount/soap_frontend/graphs/contributors
+[commit-shield]: https://img.shields.io/github/last-commit/DavFount/soap_frontend?style=for-the-badge
+[commit-url]: https://github.com/DavFount/soap_frontend
+[stars-shield]: https://img.shields.io/github/stars/DavFount/soap_frontend?style=for-the-badge
+[stars-url]: https://github.com/DavFount/soap_frontend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/DavFount/soap_frontend?style=for-the-badge
+[issues-url]: https://github.com/DavFount/soap_frontend/issues
+[license-shield]: https://img.shields.io/github/license/DavFount/soap_frontend?style=for-the-badge
+[license-url]: https://github.com/DavFount/soap_frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/davfount/
 [product-screenshot]: https://github.com/DavFount/soap/blob/main/ProductPreview.jpg?raw=true
